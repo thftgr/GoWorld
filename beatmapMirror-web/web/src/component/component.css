@@ -1,0 +1,84 @@
+.mapCardArea {
+    display: grid;
+    column-gap: 5px;
+    row-gap: 5px;
+    padding: 5px;
+    /*display: flex;*/
+}
+
+.mapSetCard {
+    max-width: 850px;
+    width: 100%;
+}
+
+.mapSetCard-top {
+    height: 120px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+}
+
+.mapSetCard-bottom {
+    height: 75px;
+    background: aquamarine;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+}
+
+.beatmapset-status-container {
+    float: left;
+    display: flex;
+    position: absolute;
+    margin: 5px;
+    transition: all .15s ease-in-out;
+}
+
+.beatmapset-status {
+    background-color: hsla(200, 10%, 20%, .7);
+    padding: 6px 15px;
+    border-radius: 10000px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: hsl(200, 40%, 100%);
+    transition: all .12s ease-in-out;
+}
+
+.beatmapset-info {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: hsla(200, 10%, 20%, .7);
+    margin: 10px;
+    float: right;
+    text-transform: uppercase;
+    color: hsl(200, 40%, 100%);
+    transition: all .12s ease-in-out;
+    border-radius: 10px;
+
+}
+.beatmapset-info-row{
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+}
+
+.beatmapset-pv-play {
+    float: left;
+    position: absolute;
+}
+
+.bi-play-fill {
+    color: white;
+    width: 60px;
+    height: 60px;
+}
+
+.bi-play-fill:hover {
+    color: orange;
+}

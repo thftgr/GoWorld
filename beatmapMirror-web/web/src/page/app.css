@@ -1,0 +1,67 @@
+.nav-bar-main{
+   height: 40px;
+    background: wheat;
+}
+.nav-bar-main-se{
+    max-width: 1200px;
+    background-color: yellow;
+    margin: 0 auto;
+    display: flex;
+    padding: 5px 0;
+
+}
+.align-justify{
+    align-items: center;
+    justify-content: center;
+}
+.svg-m05{
+    margin: 0 5px;
+
+}
+.search-input{
+    width: 100%;
+    max-width: 900px;
+    line-height: 25px;
+}
+.search-input-m{
+    margin-right: 5px;
+}
+.option-nav-main{
+    height: 40px;
+    background: beige;
+    display: flex;
+}
+.option-nav{
+    max-width: 1200px;
+    background: aquamarine;
+    display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

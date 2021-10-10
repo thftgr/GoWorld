@@ -1,0 +1,38 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.json
+*.sql
+*.zip
+*.lock
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+Beatmap Download API/*.zip
+
+
+
+**/node_modules/**
+
+.idea/*
+beatmap-downloader-app/dist/*
+
+beatmapMirrorApi/node-api/node_modules/*
+beatmapDownloader/electron/node_modules/*
+
+*.osz
+*.mp3
+
+*.log
+osuFastCashedBeatmapMirror/osuFastCashedBeatmapMirror
+
+/beatmapMirror-web/web/node_modules/*

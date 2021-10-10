@@ -1,0 +1,46 @@
+.main {
+    background-color: #ffffff;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    min-height: 600px;
+    min-width: 520px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.header {
+
+}
+
+.footer {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+}
+
+.main .loginBox {
+    flex-shrink: 0;
+}
+
+.loginBox {
+    background-color: #61dafb;
+    width: 400px;
+    min-height: 478px;
+    padding: 0 40px 22px 40px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tab-wrapper {
+    border-top: 3px solid #057feb;
+    width: 54px;
+    color: transparent;
+    height: 45px;
+}
