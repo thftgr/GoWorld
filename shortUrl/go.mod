@@ -2,7 +2,10 @@ module github.com/thftgr/GoWorld/shortUrl
 
 go 1.17
 
-require github.com/gofiber/fiber/v2 v2.20.1
+require (
+	github.com/gofiber/fiber/v2 v2.20.1
+	github.com/mattn/go-sqlite3 v1.14.8
+)
 
 require (
 	github.com/andybalholm/brotli v1.0.2 // indirect
