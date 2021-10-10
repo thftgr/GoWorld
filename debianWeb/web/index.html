@@ -1,0 +1,86 @@
+<html>
+<head>
+    <title>reCAPTCHA demo: Simple page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script async defer
+            src="https://www.google.com/recaptcha/api.js?render=6LcN6csaAAAAALQbrWks5rDhE_NvQfgVb8wN5opn"></script>
+</head>
+<body>
+<script>
+    printCookie = () => {
+        try {
+            document.getElementById("DATA").innerHTML = JSON.stringify(parseJwt(getCookie("token")), null, 2)
+        } catch (e) {
+            alert("null cookie")
+        }
+        console.log(parseJwt(getCookie("token")))
+    }
+    getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+
+    }
+    parseJwt = (token) => {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+    };
+</script>
+<button onclick="printCookie()">Print Cookie</button>
+<br>
+<LABEL> register
+    <form action="/api/v1/register" id="register" method="POST" onsubmit=submitToServer(this)>
+        <input name="username" type="text">
+        <input name="password" type="password">
+        <input name="email" type="email">
+        <input type="submit" value="Submit">
+    </form>
+</LABEL>
+<LABEL> resetPW
+    <form action="/api/v1/resetPassword" id="resetPassword" method="POST" onsubmit=submitToServer(this)>
+        <input name="username" type="text">
+        <input name="email" type="email">
+        <input type="submit" value="Submit">
+    </form>
+</LABEL>
+<LABEL> login
+    <form action="/api/v1/login" id="login" method="POST" onsubmit=submitToServer(this)>
+        <input name="username" type="text">
+        <input name="password" type="password">
+        <input type="submit" value="Submit">
+    </form>
+
+</LABEL>
+<LABEL> logout
+    <form action="/api/v1/logout" id="logout" method="POST" onsubmit=submitToServer(this)>
+        <input type="submit" value="Submit">
+    </form>
+
+</LABEL>
+<textarea id="DATA" style="height: 600px; width: 600px;"></textarea>
+
+<script>
+    submitToServer = (from) => {
+        const {id, action} = from
+        event.preventDefault();
+        grecaptcha.ready(() => {
+            grecaptcha.execute('6LcN6csaAAAAALQbrWks5rDhE_NvQfgVb8wN5opn', {action: id}).then((token) => {
+                $(`#${id}`).prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                $.post(action, $(`#${id}`).serialize(), (res) => {
+                    printCookie()
+                    alert("success");
+                }).fail(() => {
+                    alert("error");
+                });
+            });
+        });
+    }
+</script>
+</body>
+
+</html>

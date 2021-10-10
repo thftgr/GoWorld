@@ -1,0 +1,10 @@
+**this mail is test only**
+
+%v 님, 안녕하세요.
+
+
+인증코드: %v
+
+인증 코드 입력란에 공백이 들어가도 문제 없습니다.
+코드를 입력하는 대신에 아래 링크에 접속하여 확인 절차를 끝내실 수도 있습니다.
+https://debian.thftgr.synology.me/api/v1/account/verify/%v?code=%v

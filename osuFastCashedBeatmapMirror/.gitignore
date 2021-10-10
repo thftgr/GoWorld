@@ -1,0 +1,12 @@
+
+*.json
+*.zip
+*.exe
+
+web/*
+beatmaps/*
+log/*
+*.log
+osuFastCashedBeatmapMirror
+
+*.sql

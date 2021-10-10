@@ -1,0 +1,37 @@
+**this mail is test only**
+
+%v 님, 안녕하세요.
+
+%v 에서 귀하의 계정을 사용한 활동이 있었으므로, 이에 관한 확인 절차가 필요합니다.
+
+인증코드: %v
+
+인증 코드 입력란에 공백이 들어가도 문제 없습니다.
+
+코드를 입력하는 대신에 아래 링크에 접속하여 확인 절차를 끝내실 수도 있습니다.
+
+https://debian.thftgr.synology.me/api/v1/account/verify/%v?code=%v
+
+본인의 할동이 아니시라면, 아래 링크에 접속하여 귀하의 계정을 임시적으로 비활성화 하실수 있습니다.
+비활성화된 계정은 인증 완료시 자동으로 비활성화가 해제되며, 원상태로 복구됩니다.
+
+https://debian.thftgr.synology.me/api/v1/account/disable/%v?code=%v
+
+
+-----------------------------
+
+Hello, %v!
+Your Account has been logged in here: %v , So we have to verify.
+
+Verify Code is : %v
+
+Insert the Code in Verify Blank, or Press the link:
+https://debian.thftgr.synology.me/api/v1/account/verify/%v?code=%v
+
+If you did not log in, you can temporarily Locked your account!
+Locked process will be unlocked when you verify your account.
+https://debian.thftgr.synology.me/api/v1/account/disable/%v?code=%v
+
+
+Reguards,
+osu!Debian https://debian.moe
