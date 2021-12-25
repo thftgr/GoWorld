@@ -150,7 +150,7 @@ func main() {
 	//bt, _ := GetBytes(dataBase)
 	err = ioutil.WriteFile("./db.json", bb, 0644)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 	//fmt.Println(dataBase)
 

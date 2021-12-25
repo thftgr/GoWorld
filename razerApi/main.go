@@ -198,7 +198,7 @@ func main() {
 func errCheck(err error) (e bool) {
 	e = err != nil
 	if e {
-		fmt.Println(err)
+		log.Println(err)
 	}
 	return
 }

@@ -3,7 +3,6 @@ package src
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"strings"
 )
@@ -18,13 +17,13 @@ func QueryGetJsonObject(db *sql.DB, sql string, parm ...interface{}) interface{}
 
 	rows, err := db.Query(sqlString, parm...)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return ""
 	}
 
 	columns, err := rows.Columns()
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
 		return ""
 	}
@@ -94,13 +93,13 @@ func QueryGetJsonArray(db *sql.DB, sql string, parm ...interface{}) interface{} 
 
 	rows, err := db.Query(sqlString, parm...)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return ""
 	}
 
 	columns, err := rows.Columns()
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 
 		return ""
 	}
@@ -151,7 +150,7 @@ func GetSql(path string) (query string) {
 func errCheck(err error) (e bool) {
 	e = err != nil
 	if e {
-		fmt.Println(err)
+		log.Println(err)
 	}
 	return
 }

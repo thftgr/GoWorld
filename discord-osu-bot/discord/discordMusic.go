@@ -71,7 +71,7 @@ func StreamHandler(s *discordgo.Session, msg []string, gid, cID string) {
 		for {
 			res, _, err := client.GetStream(video, &fm)
 			if err != nil {
-				fmt.Println(err)
+				log.Println(err)
 				time.Sleep(time.Millisecond * 10)
 				continue
 			}
@@ -103,7 +103,7 @@ func StreamHandler(s *discordgo.Session, msg []string, gid, cID string) {
 		audiobuf := make([]int16, 1920)
 
 		if binary.Read(ffmpegout, binary.LittleEndian, &audiobuf) != nil {
-			fmt.Println(err)
+			log.Println(err)
 			break
 		}
 

@@ -1,0 +1,323 @@
+<html>
+<head>
+    <title>PCS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Nanum+Gothic:wght@400;700&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<script>
+    user = {
+        id: 'thftgr',
+        path: '/var/home/',
+
+    }
+</script>
+<div class="container-fluid">
+
+    <div>
+        <br>
+        <table class="table table-borderless m-0 p-0" style="width: 100%;">
+            <tr>
+                <td class="m-0 p-0 align-middle" align="left">
+                    <div style="font-family: 'Gugi'; font-size:2.5em;" onclick="location.replace('/')">
+                        PCS
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+
+
+        <table class="table table-borderless m-0 p-0" style="width: 100%;">
+            <tr>
+                <td class="m-0 p-0">
+                    <script>
+                        if (user.id !== null) {
+                            document.write(`<span class="badge badge-light badge-sm" style="font-family: 'Nanum Gothic', sans-serif;" >[${user.id}]로 로그인되었습니다.</span>`)
+                            document.write(`<a class="badge badge-danger badge-sm" href="/api/logout">로그아웃</a>`)
+                        }
+                    </script>
+                    <br>
+                    <br>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="m-0 p-0">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <script>
+                                const paths = user.path.split('/')
+                                console.log(JSON.stringify(paths))
+                                let pp = '';
+                                paths.map((v, i) => {
+
+                                    if (v !== '') document.write(`<li class="breadcrumb-item"><a href="/api/path${pp += v === '' ? '' : '/' + v}">${v}</a></li>`)
+
+                                })
+                            </script>
+                        </ol>
+                    </nav>
+
+
+                </td>
+            </tr>
+
+
+        </table>
+    </div>
+
+
+    <div class="grid">
+
+        <div class="grid">
+            <div class="row row-cols-2 row-cols-md-4">
+
+
+                <a href='index.php?uppage=&dir='>
+                    <div class="card border-secondary m-1 p-0">
+                        <div class="card-body text-secondary m-1 p-1 d-inline-block text-truncate text-nowrap">
+
+
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hdd-network-fill"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M2 2a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h5.5v3A1.5 1.5 0 0 0 6 11.5H.5a.5.5 0 0 0 0 1H6A1.5 1.5 0 0 0 7.5 14h1a1.5 1.5 0 0 0 1.5-1.5h5.5a.5.5 0 0 0 0-1H10A1.5 1.5 0 0 0 8.5 10V7H14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm.5 3a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2 0a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                            </svg>
+
+                            <img class="rounded-lg mb-2" src=`data:".mime_type("jpg").";base64,".$null_image."`
+                                 style="height:120px;max-width:100%;min-width:100%;object-fit:fill;"><br>
+
+                            <div class="card-img-overlay m-1 p-0 text-right"><span
+                                    class="badge badge-pill badge-warning">new</span></div>
+
+                            <div class="card-img-overlay m-1 p-0 text-right"><span
+                                    class="badge badge-pill badge-warning">new</span></div>
+
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-folder-fill"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3zm-8.322.12C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139z"/>
+                            </svg>
+
+                        </div>
+                    </div>
+                </a>
+
+                <a href='index.php?uppage=&dir='>
+                    <div class="card bg-secondary text-white text-left m-1 p-0">
+                        <div class="card-body m-1 p-1 d-inline-block text-truncate text-nowrap">
+
+                            <img class="rounded-lg mb-2"
+                                 src=`"data:".mime_type("jpg").";base64,".base64_encode(file_get_contents($dir."/".$fileinfo."/[cover].jpg"))."`
+                                 style="height:120px;max-width:100%;min-width:100%;object-fit:contain;"><br>
+
+<!--                            <img class="rounded-lg mb-2" src=`data:".mime_type("jpg").";base64,".$null_image.`-->
+<!--                                 style="height:120px;max-width:100%;min-width:100%;object-fit:fill;"><br>-->
+
+                            <div class="card-img-overlay m-1 p-0 text-right"><span
+                                    class="badge badge-pill badge-warning">new</span></div>
+
+                            <div class="card-img-overlay m-1 p-0 text-right"><span
+                                    class="badge badge-pill badge-warning">new</span></div>
+
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-book" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M1 2.828v9.923c.918-.35 2.107-.692 3.287-.81 1.094-.111 2.278-.039 3.213.492V2.687c-.654-.689-1.782-.886-3.112-.752-1.234.124-2.503.523-3.388.893zm7.5-.141v9.746c.935-.53 2.12-.603 3.213-.493 1.18.12 2.37.461 3.287.811V2.828c-.885-.37-2.154-.769-3.388-.893-1.33-.134-2.458.063-3.112.752zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <br><br>
+
+
+        <div class="grid">
+            <div class="row row-cols-2 row-cols-md-4">
+
+                <a href='viewer.php?filetype=images&mode=&file='>
+                    <div class="col mb-3">
+                        <div class="card text-black m-0 p-1">
+                            <img src="data:" class="rounded card-img-top card-img" alt="thumbnail">
+                            <div class="card-img-overlay m-1 p-0">
+                                <span class="badge badge-pill badge-success">p</span>
+                                <span class="badge badge-pill badge-success"></span>
+                                <span class="badge badge-pill badge-success"></span>
+                            </div>
+                            <div class="card-body m-0 p-0 text-center text-nowrap"
+                                 style="text-overflow: ellipsis; overflow: hidden;">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-image"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M12 16a2 2 0 0 0 2-2V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8zM3 2a1 1 0 0 1 1-1h5.5v2A1.5 1.5 0 0 0 11 4.5h2V10l-2.083-2.083a.5.5 0 0 0-.76.063L8 11 5.835 9.7a.5.5 0 0 0-.611.076L3 12V2z"/>
+                                    <path fill-rule="evenodd" d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href='viewer.php?filetype=pdf&file='>
+                    <div class="col mb-3">
+                        <div class="card text-black m-0 p-1">
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                 viewBox="0 0 56 56" style="enable-background:new 0 0 56 56;" xml:space="preserve">
+                            <g>
+                            <path style="fill:#E9E9E0;" d="M36.985,0H7.963C7.155,0,6.5,0.655,6.5,1.926V55c0,0.345,0.655,1,1.463,1h40.074
+                                c0.808,0,1.463-0.655,1.463-1V12.978c0-0.696-0.093-0.92-0.257-1.085L37.607,0.257C37.442,0.093,37.218,0,36.985,0z"/>
+                                <polygon style="fill:#D9D7CA;" points="37.5,0.151 37.5,12 49.349,12 	"/>
+                                <path style="fill:#CC4B4C;" d="M19.514,33.324L19.514,33.324c-0.348,0-0.682-0.113-0.967-0.326
+                                c-1.041-0.781-1.181-1.65-1.115-2.242c0.182-1.628,2.195-3.332,5.985-5.068c1.504-3.296,2.935-7.357,3.788-10.75
+                                c-0.998-2.172-1.968-4.99-1.261-6.643c0.248-0.579,0.557-1.023,1.134-1.215c0.228-0.076,0.804-0.172,1.016-0.172
+                                c0.504,0,0.947,0.649,1.261,1.049c0.295,0.376,0.964,1.173-0.373,6.802c1.348,2.784,3.258,5.62,5.088,7.562
+                                c1.311-0.237,2.439-0.358,3.358-0.358c1.566,0,2.515,0.365,2.902,1.117c0.32,0.622,0.189,1.349-0.39,2.16
+                                c-0.557,0.779-1.325,1.191-2.22,1.191c-1.216,0-2.632-0.768-4.211-2.285c-2.837,0.593-6.15,1.651-8.828,2.822
+                                c-0.836,1.774-1.637,3.203-2.383,4.251C21.273,32.654,20.389,33.324,19.514,33.324z M22.176,28.198
+                                c-2.137,1.201-3.008,2.188-3.071,2.744c-0.01,0.092-0.037,0.334,0.431,0.692C19.685,31.587,20.555,31.19,22.176,28.198z
+                                 M35.813,23.756c0.815,0.627,1.014,0.944,1.547,0.944c0.234,0,0.901-0.01,1.21-0.441c0.149-0.209,0.207-0.343,0.23-0.415
+                                c-0.123-0.065-0.286-0.197-1.175-0.197C37.12,23.648,36.485,23.67,35.813,23.756z M28.343,17.174
+                                c-0.715,2.474-1.659,5.145-2.674,7.564c2.09-0.811,4.362-1.519,6.496-2.02C30.815,21.15,29.466,19.192,28.343,17.174z
+                                 M27.736,8.712c-0.098,0.033-1.33,1.757,0.096,3.216C28.781,9.813,27.779,8.698,27.736,8.712z"/>
+                                <path style="fill:#CC4B4C;" d="M48.037,56H7.963C7.155,56,6.5,55.345,6.5,54.537V39h43v15.537C49.5,55.345,48.845,56,48.037,56z"/>
+                                <g>
+                                <path style="fill:#FFFFFF;" d="M17.385,53h-1.641V42.924h2.898c0.428,0,0.852,0.068,1.271,0.205
+                                    c0.419,0.137,0.795,0.342,1.128,0.615c0.333,0.273,0.602,0.604,0.807,0.991s0.308,0.822,0.308,1.306
+                                    c0,0.511-0.087,0.973-0.26,1.388c-0.173,0.415-0.415,0.764-0.725,1.046c-0.31,0.282-0.684,0.501-1.121,0.656
+                                    s-0.921,0.232-1.449,0.232h-1.217V53z M17.385,44.168v3.992h1.504c0.2,0,0.398-0.034,0.595-0.103
+                                    c0.196-0.068,0.376-0.18,0.54-0.335c0.164-0.155,0.296-0.371,0.396-0.649c0.1-0.278,0.15-0.622,0.15-1.032
+                                    c0-0.164-0.023-0.354-0.068-0.567c-0.046-0.214-0.139-0.419-0.28-0.615c-0.142-0.196-0.34-0.36-0.595-0.492
+                                    c-0.255-0.132-0.593-0.198-1.012-0.198H17.385z"/>
+                                    <path style="fill:#FFFFFF;" d="M32.219,47.682c0,0.829-0.089,1.538-0.267,2.126s-0.403,1.08-0.677,1.477s-0.581,0.709-0.923,0.937
+                                    s-0.672,0.398-0.991,0.513c-0.319,0.114-0.611,0.187-0.875,0.219C28.222,52.984,28.026,53,27.898,53h-3.814V42.924h3.035
+                                    c0.848,0,1.593,0.135,2.235,0.403s1.176,0.627,1.6,1.073s0.74,0.955,0.95,1.524C32.114,46.494,32.219,47.08,32.219,47.682z
+                                     M27.352,51.797c1.112,0,1.914-0.355,2.406-1.066s0.738-1.741,0.738-3.09c0-0.419-0.05-0.834-0.15-1.244
+                                    c-0.101-0.41-0.294-0.781-0.581-1.114s-0.677-0.602-1.169-0.807s-1.13-0.308-1.914-0.308h-0.957v7.629H27.352z"/>
+                                    <path style="fill:#FFFFFF;"
+                                          d="M36.266,44.168v3.172h4.211v1.121h-4.211V53h-1.668V42.924H40.9v1.244H36.266z"/>
+                                </g>
+                                </g>
+                            </svg>
+                            <div class="card-img-overlay m-1 p-0">
+                                <span class="badge badge-pill badge-success">PDF FILE</span>
+                            </div>
+                            <div class="card-body m-0 p-0 text-center text-nowrap"
+                                 style="text-overflow: ellipsis; overflow: hidden;">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-image"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M12 16a2 2 0 0 0 2-2V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8zM3 2a1 1 0 0 1 1-1h5.5v2A1.5 1.5 0 0 0 11 4.5h2V10l-2.083-2.083a.5.5 0 0 0-.76.063L8 11 5.835 9.7a.5.5 0 0 0-.611.076L3 12V2z"/>
+                                    <path fill-rule="evenodd" d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href='viewer.php?mode=&file='>
+                    <div class="col mb-3">
+                        <div class="card text-black m-0 p-1">
+                            <img src="data:" class="rounded card-img-top card-img" alt="thumbnail">
+                            <div class="card-img-overlay m-1 p-0">
+                                <span class="badge badge-pill badge-success">p</span>
+                                <span class="badge badge-pill badge-success"></span>
+                                <span class="badge badge-pill badge-success"></span>
+                            </div>
+                            <div class="card-body m-0 p-0 text-center text-nowrap"
+                                 style="text-overflow: ellipsis; overflow: hidden;">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-zip-fill"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M2 2a2 2 0 0 1 2-2h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm7
+                                          2l.5-2.5 3 3L10 5a1 1 0 0 1-1-1zM5.5 3V2h-1V1H6v1h1v1H6v1h1v1H6v1h1v1H5.5V6h-1V5h1V4h-1V3h1zm0 4.5a1 1 0 0 0-1
+                                          1v.938l-.4 1.599a1 1 0 0 0 .416 1.074l.93.62a1 1 0 0 0 1.109 0l.93-.62a1 1 0 0 0 .415-1.074l-.4-1.599V8.5a1 1 0 0
+                                          0-1-1h-1zm0 1.938V8.5h1v.938a1 1 0 0 0 .03.243l.4 1.598-.93.62-.93-.62.4-1.598a1 1 0 0 0 .03-.243z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href='viewer.php?filetype=images&mode=&file='>
+                    <div class="col mb-3">
+                        <div class="card text-black m-0 p-1">
+                            <img src="data:" class="rounded card-img-top card-img" alt="thumbnail">
+                            <div class="card-img-overlay m-1 p-0">
+                                <span class="badge badge-pill badge-success">p</span>
+                                <span class="badge badge-pill badge-success">s</span>
+                                <span class="badge badge-pill badge-success">c</span>
+                            </div>
+                            <div class="card-body m-0 p-0 text-center text-nowrap"
+                                 style="text-overflow: ellipsis; overflow: hidden;">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-image"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M12 16a2 2 0 0 0 2-2V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8zM3 2a1 1 0 0 1 1-1h5.5v2A1.5 1.5 0 0 0 11 4.5h2V10l-2.083-2.083a.5.5 0 0 0-.76.063L8 11 5.835 9.7a.5.5 0 0 0-.611.076L3 12V2z"/>
+                                    <path fill-rule="evenodd" d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                </svg>
+                                image_folder
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+        <br>
+        <nav class="navbar  navbar-light bg-white m-0 p-2 " aria-label="Page navigation">
+            <table style="width: 100%;">
+
+                <tr>
+                    <td style="width: 100%; align-self: center;" class="p-2">
+                        <div class="pagination pagination-sm justify-content-center pagination-outline-primary">
+
+                            <div class="page-item ">
+                                <button class="page-link" onclick="location.replace('./index.php?sort=&dir=&page=')"
+                                        tabindex="-1" aria-disabled="true">Previous
+                                </button>
+                            </div>
+                            <div class="nav-bar dropdown dropup">
+                                <button class="page-link dropdown-toggle" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown">a
+
+                                </button>
+
+                                <div class="dropdown-menu-right dropdown-menu m-0 p-0">
+
+                                    <button onclick="location.replace('./index.php?sort=&dir=&page=')"
+                                            class="btn btn-sm dropdown-item m-0 p-1">[페이지]
+                                    </button>
+
+                                </div>
+                            </div>
+                            <div class="page-item disabled">
+                                <button class="page-link" onclick="location.replace('./index.php?sort=&dir=&page=')">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </nav>
+    </div>
+</div>
+</body>
+</html>

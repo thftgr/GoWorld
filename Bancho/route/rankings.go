@@ -103,7 +103,7 @@ func Rankings(c echo.Context) (err error) {
 	var req request
 	if err = c.Bind(&req); err != nil || req.Mode == "" || req.Type == "" {
 		_ = c.NoContent(http.StatusBadRequest)
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 	req.Cursor.Id = c.Request().URL.Query().Get("cursor[_id]")
@@ -135,7 +135,7 @@ left join (select CODE,DISPLAY_NAME from BANCHO.COUNTRY_CODE where DISPLAY_NAME_
 	)
 	if err != nil {
 		c.NoContent(http.StatusBadRequest)
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 	defer rows.Close()
@@ -147,7 +147,7 @@ left join (select CODE,DISPLAY_NAME from BANCHO.COUNTRY_CODE where DISPLAY_NAME_
 			&r.GradeCounts.Ss, &r.GradeCounts.Ssh, &r.GradeCounts.S, &r.GradeCounts.Sh, &r.GradeCounts.A, &r.User.Username, &r.User.Country.Code, &r.User.Country.Name)
 		if err != nil {
 			c.NoContent(http.StatusBadRequest)
-			fmt.Println(err)
+			log.Println(err)
 			return
 		}
 		r.User.AvatarUrl = fmt.Sprintf("https://a.%s/%d", userDB.Host, *r.User.Id)

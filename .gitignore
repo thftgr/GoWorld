@@ -8,6 +8,7 @@
 *.sql
 *.zip
 *.lock
+*.db
 # Test binary, built with `go test -c`
 *.test
 
@@ -36,3 +37,5 @@ beatmapDownloader/electron/node_modules/*
 osuFastCashedBeatmapMirror/osuFastCashedBeatmapMirror
 
 /beatmapMirror-web/web/node_modules/*
+iwaraDownloader/
+privateComicServer/data/*

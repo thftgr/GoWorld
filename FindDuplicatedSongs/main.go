@@ -15,7 +15,7 @@ func main() {
 
 	fi, err := ioutil.ReadDir(path)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 	c, err := regexp.Compile("^([0-9]+)(\\s)")
@@ -32,7 +32,7 @@ func main() {
 
 				err := os.Rename(path+"/"+i[a].Name(), path+"/dup/"+i[a].Name())
 				if err != nil {
-					fmt.Println(err)
+					log.Println(err)
 				}
 
 			}

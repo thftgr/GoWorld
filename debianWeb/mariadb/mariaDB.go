@@ -215,13 +215,13 @@ func LoginData(username, password string) (v map[string]interface{}, err error) 
 func Logout(data map[string]interface{}) (err error) {
 	t, err := time.Parse("2006-01-02T15:04:05-07:00", data["expiration"].(string))
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 	rows, err := Maria.Query(QueryLogout, data["request_id"].(string), t.Format("2006-01-02 15:04:05"))
 
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 
@@ -277,7 +277,7 @@ func CheckDisableCode(userid, code string) (err error) {
 func SetAccountStatus(userid, status interface{}) (err error) {
 	rows, err := Maria.Query(QueryUpdateAccountStatus, status, userid, userid)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 	defer rows.Close()

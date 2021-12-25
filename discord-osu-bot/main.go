@@ -85,12 +85,12 @@ func DiscordMessageEventListener(s *discordgo.Session, m *discordgo.MessageCreat
 		if d {
 			_, err := s.ChannelMessageSend(m.ChannelID, "is server owner")
 			if err != nil {
-				fmt.Println(err)
+				log.Println(err)
 			}
 		} else {
 			_, err := s.ChannelMessageSend(m.ChannelID, "is not server owner")
 			if err != nil {
-				fmt.Println(err)
+				log.Println(err)
 			}
 		}
 	case "owo":
