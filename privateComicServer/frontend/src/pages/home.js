@@ -5,26 +5,26 @@ import {BsFillFolderFill} from "react-icons/bs";
 import Modal from 'react-bootstrap/Modal'
 
 export default class Home extends React.Component {
-    state = {
-        baseUrl: []
-    }
     data = {
-        // "dirs": [
-        //     "12313 zzzz"
-        // ],
-        // "gallery": [
+        // "path": "/",
+        // "files": [""],
+        // "galleries": [
         //     {
-        //         "Name": "12313 aaaa",
-        //         "Thumbnail": "/12313 aaaa/bg(CUnet)(noise_scale)(Level3)(tta)(3840x2160).png"
+        //         "thumb": "12313 aaaa/bg(CUnet)(noise_scale)(Level3)(tta)(3840x2160).png",
+        //         "galleryName": "12313 aaaa"
         //     },
         //     {
-        //         "Name": "12313 zzzz",
-        //         "Thumbnail": "/12313 zzzz/bg(CUnet)(noise_scale)(Level3)(tta)(3840x2160).png"
+        //         "thumb": "12313 zzzz/bg(CUnet)(noise_scale)(Level3)(tta)(3840x2160).png",
+        //         "galleryName": "12313 zzzz"
         //     }
         // ],
-        // "path": ""
+        // "dirs": [
+        //     "12313 zzzz"
+        // ]
     }
-
+    state ={
+        modalImage:[]
+    }
     componentDidMount() {
         fetch("http://localhost/api/file/list").then((res) => res.json()).then((res) => {
             this.data = res
@@ -32,38 +32,70 @@ export default class Home extends React.Component {
             console.log("CALL API")
         })
     }
-
-    Example = () => {
+    galleryPreview = (props) => {
         const values = [true, 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];
         const [fullscreen, setFullscreen] = useState(true);
         const [show, setShow] = useState(false);
-
         function handleShow(breakpoint) {
             setFullscreen(breakpoint);
             setShow(true);
         }
+        const { thumb,galleryName } = props.gallery
+
+        const loadImage = async () => {
+            this.setState({modalImage: []})
+            fetch(`http://localhost/api/file/list?path=${this.data.path}/${galleryName}`).then(res => res.json()).then(res => {
+                this.setState({modalImage: res.files})
+            })
+        }
 
         return (
             <>
-                {values.map((v, idx) => (
-                    <Button key={idx} className="me-2" onClick={() => handleShow(v)}>
-                        Full screen
-                        {typeof v === 'string' && `below ${v.split('-')[0]}`}
-                    </Button>
-                ))}
+                <Image
+                    src={`http://localhost/api/file/${this.data.path}/${thumb}`}
+                    rounded={true}
+                    style={{
+                        width: '100%',
+                        maxWidth: '300px',
+                        height: '300px',
+                        objectFit: 'cover',
+                    }}
+                    loading="lazy"
+                    onClick={() => {
+                        handleShow(true)
+                        loadImage()
+                    }
+
+                }
+                />
                 <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Modal</Modal.Title>
+                        <Modal.Title>{galleryName}</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Modal body content</Modal.Body>
+                    <Modal.Body>
+                        {this.state.modalImage.map((v,i)=>{
+                           return(
+                               <Image
+                                   key={i}
+                                   src={`http://localhost/api/file/${this.data.path}/${galleryName}/${v}`}
+                                   rounded={true}
+                                   style={{
+                                       width: '100%',
+                                       objectFit: 'cover',
+                                   }}
+                                   loading="lazy"/>
+                           )
+                        })}
+                    </Modal.Body>
                 </Modal>
             </>
         );
     }
 
-
     render() {
         console.log(this.state)
+        console.log(this.data.path)
+
         return (
             <Container
                 style={{
@@ -104,9 +136,10 @@ export default class Home extends React.Component {
                                     background: "blue",
                                     // maxHeight:'300px',
                                 }} onClick={() => {
+                                    // window.history.push(`/?path=path=${this.data.path}/${v}`)
+
                                     fetch(`http://localhost/api/file/list?path=${this.data.path}/${v}`).then((res) => res.json()).then((res) => {
                                         this.data = res
-                                        this.forceUpdate()
                                         this.forceUpdate()
                                     })
                                 }}>
@@ -117,39 +150,30 @@ export default class Home extends React.Component {
                         })
                     }
                     {
-                        this.data?.gallery?.map((v, i) => {
+                        this.data?.galleries?.map((v, i) => {
+
                             return (
                                 <Col key={i} style={{
                                     padding: '10px',
                                     background: "blue",
                                     // maxHeight:'300px',
                                 }}>
-                                    <Image
-                                        src={`http://localhost/api/file${v.Thumbnail}`}
-                                        rounded={true}
-                                        style={{
-                                            width: '100%',
-                                            maxWidth: '300px',
-                                            height: '300px',
-                                            objectFit: 'cover',
-                                        }}
-                                        loading="lazy"
-                                        onClick={() => {
-                                            const [fullscreen] = useState(true);
-                                            const [show, setShow] = useState(false);
-                                            return(
-                                                <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title>Modal</Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body>Modal body content</Modal.Body>
-                                                </Modal>
-                                            )
+                                    {/*<Image*/}
+                                    {/*    src={`http://localhost/api/file${this.data.path}/${v.thumb}`}*/}
+                                    {/*    rounded={true}*/}
+                                    {/*    style={{*/}
+                                    {/*        width: '100%',*/}
+                                    {/*        maxWidth: '300px',*/}
+                                    {/*        height: '300px',*/}
+                                    {/*        objectFit: 'cover',*/}
+                                    {/*    }}*/}
+                                    {/*    loading="lazy"*/}
+                                    {/*    // onClick={}*/}
+                                    {/*/>*/}
 
-                                        }}
-                                    />
+                                    <this.galleryPreview gallery={v} />
                                     {/*<BsImage style={{width:'100%',height:'300px'}}/>*/}
-                                    <h3>gal: {v.Name}</h3>
+                                    <h3>gal: {v.galleryName}</h3>
                                 </Col>
                             )
                         })
