@@ -1,64 +1,52 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Col, Container, Image, Row} from "react-bootstrap";
+import {Col, Container, Image, Row} from "react-bootstrap";
 import {BsFillFolderFill} from "react-icons/bs";
 import Modal from 'react-bootstrap/Modal'
+import queryString from "query-string";
+// import { useLocation, useParams } from 'react-router';
+import {    BrowserRouter as Router,    Link,    useLocation} from "react-router-dom";
 
 export default class Home extends React.Component {
-    data = {
-        // "path": "/",
-        // "files": [""],
-        // "galleries": [
-        //     {
-        //         "thumb": "12313 aaaa/bg(CUnet)(noise_scale)(Level3)(tta)(3840x2160).png",
-        //         "galleryName": "12313 aaaa"
-        //     },
-        //     {
-        //         "thumb": "12313 zzzz/bg(CUnet)(noise_scale)(Level3)(tta)(3840x2160).png",
-        //         "galleryName": "12313 zzzz"
-        //     }
-        // ],
-        // "dirs": [
-        //     "12313 zzzz"
-        // ]
-    }
-    state ={
-        modalImage:[]
-    }
+    data = {}
+    state = {modalImage: []}
+
+
     componentDidMount() {
-        fetch("http://localhost/api/file/list").then((res) => res.json()).then((res) => {
+        const { search } = window.location
+        const {path = "/"} = queryString.parse(search)
+        console.log(path )
+        fetch(`http://192.168.0.62/api/file/list?path=${path }`).then((res) => res.json()).then((res) => {
             this.data = res
             this.forceUpdate()
             console.log("CALL API")
         })
     }
+
     galleryPreview = (props) => {
-        const values = [true, 'sm-down', 'md-down', 'lg-down', 'xl-down', 'xxl-down'];
         const [fullscreen, setFullscreen] = useState(true);
         const [show, setShow] = useState(false);
+
         function handleShow(breakpoint) {
             setFullscreen(breakpoint);
             setShow(true);
         }
-        const { thumb,galleryName } = props.gallery
+
+        const {thumb, galleryName} = props.gallery
 
         const loadImage = async () => {
             this.setState({modalImage: []})
-            fetch(`http://localhost/api/file/list?path=${this.data.path}/${galleryName}`).then(res => res.json()).then(res => {
+            fetch(`http://192.168.0.62/api/file/list?path=${this.data.path}/${galleryName}`).then(res => res.json()).then(res => {
                 this.setState({modalImage: res.files})
             })
         }
 
-        return (
-            <>
+        return (<>
                 <Image
-                    src={`http://localhost/api/file/${this.data.path}/${thumb}`}
+                    src={`http://192.168.0.62/api/file/${this.data.path}/${thumb}`}
                     rounded={true}
                     style={{
-                        width: '100%',
-                        maxWidth: '300px',
-                        height: '300px',
-                        objectFit: 'cover',
+                        width: '100%', maxWidth: '300px', height: '300px', objectFit: 'cover',
                     }}
                     loading="lazy"
                     onClick={() => {
@@ -66,43 +54,37 @@ export default class Home extends React.Component {
                         loadImage()
                     }
 
-                }
+                    }
                 />
                 <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>{galleryName}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {this.state.modalImage.map((v,i)=>{
-                           return(
-                               <Image
-                                   key={i}
-                                   src={`http://localhost/api/file/${this.data.path}/${galleryName}/${v}`}
-                                   rounded={true}
-                                   style={{
-                                       width: '100%',
-                                       objectFit: 'cover',
-                                   }}
-                                   loading="lazy"/>
-                           )
+                        {this.state.modalImage.map((v, i) => {
+                            return (<Image
+                                    key={i}
+                                    src={`http://192.168.0.62/api/file/${this.data.path}/${galleryName}/${v}`}
+                                    rounded={true}
+                                    style={{
+                                        width: '100%', objectFit: 'cover',
+                                    }}
+                                    loading="lazy"/>)
                         })}
                     </Modal.Body>
                 </Modal>
-            </>
-        );
+            </>);
     }
+
 
     render() {
         console.log(this.state)
         console.log(this.data.path)
+        console.log(window.location)
 
-        return (
-            <Container
+        return (<Container
                 style={{
-                    padding: '10px',
-                    maxWidth: 1920,
-                    background: "gray",
-                    margin: `0 auto`
+                    padding: '10px', maxWidth: 1920, background: "gray", margin: `0 auto`
                 }}
                 fluid={true}
             >
@@ -120,70 +102,39 @@ export default class Home extends React.Component {
                     xs={{cols: 1}}
                     // xxl={{cols: 5}}
                     style={{
-                        '--bs-gutter-x': `0em`,
-                        margin: `0 auto`,
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        '--bs-gutter-x': `0em`, margin: `0 auto`, justifyContent: 'center', alignItems: 'center',
 
                     }}
 
                 >
-                    {
-                        this.data?.dirs?.map((v, i) => {
-                            return (
+                    {this.data?.dirs?.map((v, i) => {
+                        return (
+                            <a href={`?path=${this.data.path === "/" ? "/": `${this.data.path}/`}${v}`}>
                                 <Col key={v} style={{
-                                    padding: '10px',
-                                    background: "blue",
-                                    // maxHeight:'300px',
-                                }} onClick={() => {
-                                    // window.history.push(`/?path=path=${this.data.path}/${v}`)
-
-                                    fetch(`http://localhost/api/file/list?path=${this.data.path}/${v}`).then((res) => res.json()).then((res) => {
-                                        this.data = res
-                                        this.forceUpdate()
-                                    })
+                                    padding: '10px', background: "blue", // maxHeight:'300px',
                                 }}>
                                     <BsFillFolderFill style={{width: '100%', height: '300px'}}/>
-                                    <h3>dir: {v}</h3>
+                                    <h3>{v}</h3>
                                 </Col>
-                            )
-                        })
-                    }
-                    {
-                        this.data?.galleries?.map((v, i) => {
+                            </a>
 
-                            return (
-                                <Col key={i} style={{
-                                    padding: '10px',
-                                    background: "blue",
-                                    // maxHeight:'300px',
-                                }}>
-                                    {/*<Image*/}
-                                    {/*    src={`http://localhost/api/file${this.data.path}/${v.thumb}`}*/}
-                                    {/*    rounded={true}*/}
-                                    {/*    style={{*/}
-                                    {/*        width: '100%',*/}
-                                    {/*        maxWidth: '300px',*/}
-                                    {/*        height: '300px',*/}
-                                    {/*        objectFit: 'cover',*/}
-                                    {/*    }}*/}
-                                    {/*    loading="lazy"*/}
-                                    {/*    // onClick={}*/}
-                                    {/*/>*/}
-
-                                    <this.galleryPreview gallery={v} />
-                                    {/*<BsImage style={{width:'100%',height:'300px'}}/>*/}
-                                    <h3>gal: {v.galleryName}</h3>
-                                </Col>
                             )
-                        })
-                    }
+                    })}
+                    {this.data?.galleries?.map((v, i) => {
+
+                        return (<Col key={i} style={{
+                                padding: '10px', background: "blue", // maxHeight:'300px',
+                            }}>
+
+                                <this.galleryPreview gallery={v}/>
+                                <h3>{v.galleryName}</h3>
+                            </Col>)
+                    })}
 
 
                 </Row>
 
-            </Container>
-        );
+            </Container>);
     }
 
 

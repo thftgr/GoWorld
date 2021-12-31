@@ -12,8 +12,10 @@ import (
 
 var RootDir DirectoryTree
 
+const ROOT = `./data`
+
 func init() {
-	RootDir = ReadDir("./data")
+	RootDir = ReadDir(ROOT)
 	//b, _ := json.MarshalIndent(RootDir, "", "    ")
 	//fmt.Println(string(b))
 }
@@ -85,7 +87,7 @@ func (v *DirectoryTree) GetInfo(path string) (dir Directory) {
 
 	var t Directory
 	//TODO 파일 처리
-	t.Path = strings.ReplaceAll(tmp.Path, "./data", "")
+	t.Path = strings.ReplaceAll(tmp.Path, ROOT, "")
 	if t.Path == "" {
 		t.Path = "/"
 	}
@@ -111,6 +113,9 @@ func (v *DirectoryTree) GetInfo(path string) (dir Directory) {
 		}
 
 		if len(tt.Dirs) > 0 {
+			t.Dirs = append(t.Dirs, s)
+		}
+		if len(tt.Dirs) == 0 && vid > 0 {
 			t.Dirs = append(t.Dirs, s)
 		}
 

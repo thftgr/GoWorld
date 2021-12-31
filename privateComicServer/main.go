@@ -5,6 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/thftgr/GoWorld/privateComicServer/route"
+	"github.com/thftgr/GoWorld/privateComicServer/src"
 	"log"
 )
 
@@ -38,7 +39,7 @@ func main() {
 	//f.Post("/api/signUp/admin", route.AdminSignUp)
 
 	f.Get("/api/file/list", route.GetFileList)
-	f.Static("/api/file/", "./data")
+	f.Static("/api/file/", src.ROOT)
 
 	log.Fatalln(f.Listen(":80"))
 }
