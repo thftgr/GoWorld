@@ -5,6 +5,7 @@ import (
 	"Bancho/userDB"
 	"fmt"
 	"github.com/labstack/echo/v4"
+	"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -13,7 +14,7 @@ import (
 //
 //func queryBuilder(s *SearchQuery) (qs string, i []interface{}) {
 //
-//	(*s).Status = parseStatus((*s).Status)
+//	(*s).Ranked = parseStatus((*s).Ranked)
 //	(*s).Mode = parseMode((*s).Mode)
 //	(*s).Sort = parseSort((*s).Sort)
 //	(*s).Page = parsePage((*s).Page)
@@ -24,9 +25,9 @@ import (
 //	query.WriteString("SELECT * FROM osu.beatmapset ")
 //	//ranked
 //
-//	if (*s).Status != "all" {
-//		buf1 = append(buf1, "RANKED IN("+(*s).Status+")")
-//		buf2 = append(buf2, "RANKED IN("+(*s).Status+")")
+//	if (*s).Ranked != "all" {
+//		buf1 = append(buf1, "RANKED IN("+(*s).Ranked+")")
+//		buf2 = append(buf2, "RANKED IN("+(*s).Ranked+")")
 //	}
 //
 //	if (*s).Mode != "all" {
