@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"regexp"
-	"strconv"
 )
 
 var (
@@ -17,93 +16,30 @@ var (
 	regCreator, _          = regexp.Compile(`(?:<span class="beatmap-pack__author beatmap-pack__author--bold">)(.*)(?:</span>)`)
 	regLastPage, _         = regexp.Compile(`(?:<a class="pagination-v2__link" href=".+?">)([0-9]+?)(?:</a>)`)
 )
-var (
-	packName    []string
-	packId      []string
-	packDate    []string
-	packCreator []string
-)
-var packType = []string{
-	"standard",
-	"chart",
-	"theme",
-	"artist",
-}
 
 func main() {
-	//for i := 0; i < len(packType); i++ {
-	page := 0
-	bodyString := fetch(packType[0], strconv.Itoa(page))
-	m := regLastPage.FindAllStringSubmatch(bodyString, -1)
-	for _, sm := range m {
-		if len(sm) > 1 {
-			t1, _ := strconv.Atoi(sm[1])
-			if page < t1 {
-				page = t1
-			}
-		}
-	}
-	parseBody(bodyString)
-	//for j := 1; j <= page; j++ {
-	//	time.Sleep(time.Millisecond * 500)
-	//	bodyString = fetch(packType[i], strconv.Itoa(j))
-	//	parseBody(bodyString)
-	//}
-	//}
-	fmt.Println(len(packId), len(packDate), len(packCreator), len(packName))
-	fmt.Printf("| %5s | %10s | %30s | %s \n", "id", "packDate", "packCreator", "packName")
-	fmt.Printf("| %5s | %10s | %30s | \n", "-----", "----------", "------------------------------")
-	for j := 0; j < len(packId); j++ {
-		fmt.Printf("| %5s | %10s | %30s | %s \n", packId[j], packDate[j], packCreator[j], packName[j])
+	//https://osu.ppy.sh/beatmaps/packs/2331/raw
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", "https://osu.ppy.sh/beatmaps/packs/2331/raw", nil)
+
+	if err != nil {
+		return
 	}
 
-}
-func parseBody(bodyString string) {
-	m := regPackName.FindAllStringSubmatch(bodyString, -1)
-	for _, sm := range m {
-		if len(sm) > 1 {
-			packName = append(packName, sm[1])
-		} else {
-			packName = append(packName, "")
-		}
-	}
-	m = regPackId.FindAllStringSubmatch(bodyString, -1)
-	for _, sm := range m {
-		if len(sm) > 1 {
-			packId = append(packId, sm[1])
-		} else {
-			packId = append(packId, "")
-		}
-	}
-	m = regPackDate.FindAllStringSubmatch(bodyString, -1)
-	for _, sm := range m {
-		if len(sm) > 1 {
-			packDate = append(packDate, sm[1])
-		} else {
-			packDate = append(packDate, "")
-		}
-	}
-	m = regCreator.FindAllStringSubmatch(bodyString, -1)
-	for _, sm := range m {
-		if len(sm) > 1 {
-			packCreator = append(packCreator, sm[1])
-		} else {
-			packCreator = append(packCreator, "")
-		}
-	}
-}
-func fetch(Type, page string) string {
-	res, err := http.Get(fmt.Sprintf("https://osu.ppy.sh/beatmaps/packs?type=%s&page=%s", Type, page))
-	if err != nil || res.StatusCode != http.StatusOK {
-		if res != nil {
-			panic(res.Status)
-		}
-		panic(err)
+	req.Header.Add("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiYjZlYWNjNGI4NWVmYjFmMWZjOWZlZTQzYzY2ZWQ4MjZjODY4ZjBhNDI1NTU2YjcwNzVjYWY3NDY4MmE4YmQzZjY4NzA5YWRhZThiYTQyNzEiLCJpYXQiOjE2NDM5NTMxMzAuNDk0MzEzLCJuYmYiOjE2NDM5NTMxMzAuNDk0MzE3LCJleHAiOjE2NDQwMzk0ODIuNzE2NDgsInN1YiI6IjgxNDYyMzIiLCJzY29wZXMiOlsiKiJdfQ.JzrieW8JcUDnXA12R1MAIjfkn0mb8Uytb0OUjnQQBuyA_kIOClipeEn5StsXVg-jEGsOZgsem546gE59METRqcEeLb9zPOI0LR2-TreVWw-MZpXqJpLVfXI_5QkuaHbWL2FTvnt_eZoJjgmlpmPcmlIxf9j2QbtfwzIbhy1MytZew9DQix7lgfxzQ3DoBU8CjU6tza43NavJZYP0vuDHkJfGKTWqwaEIXUFRPbvlTH1YkPQ5TenmHkiFiRUAKIhyRqYdErZS6zAAoYpTvinizDU9rNFNLIm0Kb-q4sf87rEyK2lGRaUzYkqeu8khN_FRy3I5u15rRGluNWa0XdW9orCRSCqxCq9EFY-Gbg7_6dpphI8x2e5iVyKMl9WaxcNM3YDmKYFsG3RKWyY9KT4MOdzM602IZGl8ZfkA2XRyy0enTaS2hqnAnoNpt3tFMwbSeL50cZi6pm2qNk9GL_ZwtFsaZYKLC20cx03iFh_nfceeeZD54cfu58ar2hCEEPIE7XTFkU4hPQ1qTRKczzrPK5OC5_Ln0dLsuCEYdFdDfjE45aNGexfDzQHzPw4LkamFFuCbFUU0ubiutjIxoWHf-L5IUJX788FQyuCzLxA9emIqZwUTs77NFSltLF5rdkE3E3Ue_2mUCsgVuDw0bEkqtCaAlluS1fQXBYizvlSnzhs")
+
+	res, err := client.Do(req)
+	if err != nil {
+		return
 	}
 	defer res.Body.Close()
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		panic(err)
+
+	if res.StatusCode != 200 {
+
 	}
-	return string(body)
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return
+	}
+	fmt.Println(string(body))
 }
