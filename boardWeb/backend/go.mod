@@ -23,7 +23,7 @@ require (
 	github.com/valyala/fasttemplate v1.2.1 // indirect
 	github.com/xo/terminfo v0.0.0-20210125001918-ca9a967f8778 // indirect
 	golang.org/x/net v0.0.0-20210913180222-943fd674d43e // indirect
-	golang.org/x/sys v0.0.0-20210910150752-751e447fb3d0 // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/term v0.0.0-20210615171337-6886f2dfbf5b // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20201208040808-7e3f01d25324 // indirect
