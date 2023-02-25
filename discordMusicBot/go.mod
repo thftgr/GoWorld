@@ -16,7 +16,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/u2takey/go-utils v0.0.0-20200713025200-4704d09fc2c7 // indirect
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/sys v0.0.0-20211214234402-4825e8c3871d // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.3.7 // indirect
 )
 
